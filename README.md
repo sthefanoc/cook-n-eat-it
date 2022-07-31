@@ -176,9 +176,10 @@ class Recipe(models.Model):
 ``` 
 Apply changes to database with:
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
-
+Now
 
 
 
