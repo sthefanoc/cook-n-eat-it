@@ -8,6 +8,7 @@ A recipe sharing application using Django and React.
     - [Create virtual environment](#create-virtual-environment)
     - [Install requirements](#install-requirements)
   - [Django recipe server](#django-recipe-server)
+    - [Create Django project](#create-django-project)
   - [Project commit structure](#project-commit-structure)
 
 ## Project Start
@@ -79,6 +80,8 @@ pip install -r requirements.txt
 
 ## Django recipe server
 
+### Create Django project
+
 Create Django project inside the `/server-django` folder, run:
 
 ```bash
@@ -127,11 +130,16 @@ urlpatterns = [
 ]
 ```
 
-After the setup of settings and urls, we can run the server:
+Now, we can run the server with:
 ```bash
 python manage.py runserver
 ```
-
+The application will be available at http://localhost:8000/api/
+```JSON
+{
+    "message": "Hello, World!"
+}
+```
 
 
 ## Project commit structure
