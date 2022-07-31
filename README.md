@@ -9,6 +9,7 @@ A recipe sharing application using Django and React.
     - [Install requirements](#install-requirements)
   - [Django recipe server](#django-recipe-server)
     - [Create Django project](#create-django-project)
+    - [Start recipes app](#start-recipes-app)
   - [Project commit structure](#project-commit-structure)
 
 ## Project Start
@@ -140,6 +141,51 @@ The application will be available at http://localhost:8000/api/
     "message": "Hello, World!"
 }
 ```
+### Start recipes app
+To start the app creating, run:
+```bash
+python manage.py startapp recipes
+```
+Add the application to `cookneatit/settings.py`:
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'api',
+    'recipes'
+]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Project commit structure
