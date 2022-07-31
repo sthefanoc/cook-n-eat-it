@@ -7,6 +7,7 @@ A recipe sharing application using Django and React.
     - [Install Python and Git Bash](#install-python-and-git-bash)
     - [Create virtual environment](#create-virtual-environment)
     - [Install requirements](#install-requirements)
+  - [Project commit structure](#project-commit-structure)
 
 ## Project Start
 
@@ -19,9 +20,11 @@ Add python to path (if it isn’t already).
 
 ### Create virtual environment
 
-Create a virtual environment called `venv.`
+Inside the project directory, create a server folder called `/server-django`.
 
-For windows:
+Inside that folder, create a virtual environment called `venv.`
+
+For Windows:
 
 ```bash
 python -m venv venv
@@ -66,3 +69,27 @@ django-cors-headers
 ```
 
 Django versions tend to change a lot with time. So it is important that we specify a version to avoid unwanted effects.
+
+To install dependencies, run:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Project commit structure
+
+Based on this FreeCodeCamp article:
+[How to Write Better Git Commit Messages](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/)
+
+Structure:
+ - `feat` – a new feature is introduced with the changes
+ - `fix` – a bug fix has occurred
+ - `chore` – changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
+ - `refactor` – refactored code that neither fixes a bug nor adds a feature
+ - `docs` – updates to documentation such as a the README or other markdown files
+ - `style` – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
+ - `test` – including new or correcting previous tests
+ - `perf` – performance improvements
+ - `ci` – continuous integration related
+ - `build` – changes that affect the build system or external dependencies
+ - `revert` – reverts a previous commit
