@@ -7,6 +7,7 @@ A recipe sharing application using Django and React.
     - [Install Python and Git Bash](#install-python-and-git-bash)
     - [Create virtual environment](#create-virtual-environment)
     - [Install requirements](#install-requirements)
+  - [Django recipe server](#django-recipe-server)
   - [Project commit structure](#project-commit-structure)
 
 ## Project Start
@@ -75,6 +76,63 @@ To install dependencies, run:
 ```bash
 pip install -r requirements.txt
 ```
+
+## Django recipe server
+
+Create Django project inside the `/server-django` folder, run:
+
+```bash
+django-admin startproject cookneatit .
+```
+Start our API with:
+```bash
+python manage.py startapp api
+```
+Setup API with changes to `api/urls.py`:
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.api_home),
+]
+```
+And to `api/views.py`:
+```python
+from django.http import JsonResponse
+
+def api_home(request, *args, **kwargs):
+    return JsonResponse({'message': 'Hello world!'})
+```
+And `cookneatit/settings.py`:
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'api',
+]
+```
+And `cookneatit/urls.py`:
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
+]
+```
+
+After the setup of settings and urls, we can run the server:
+```bash
+python manage.py runserver
+```
+
+
 
 ## Project commit structure
 
