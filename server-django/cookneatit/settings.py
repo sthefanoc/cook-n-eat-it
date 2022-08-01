@@ -13,13 +13,24 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import cloudinary
 import os
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+
+DEBUG = True
+
+
+ 
 cloudinary.config(
-    cloud_name="cookneatit",
-    api_key=os.environ.get('CLOUDINARY_API_KEY'),
-    api_secret=os.environ.get('CLOUDINARY_API_SECRET')
+    cloud_name=os.getenv('CLOUDINARY_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
 )
 
+print('CLOUDINARY_NAME', os.getenv('CLOUDINARY_NAME'))
+print('CLOUDINARY_API_KEY', os.getenv('CLOUDINARY_API_KEY'))
+print('CLOUDINARY_API_SECRET', os.getenv('CLOUDINARY_API_SECRET'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,9 +43,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^(o3x_8!-3(c2#l*@!7jusfewd8kfb@)%(ky%498ox687b6pkf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+
+ALLOWED_HOSTS = ['res.cloudinary.com','localhost']
 
 
 # Application definition
@@ -133,3 +145,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

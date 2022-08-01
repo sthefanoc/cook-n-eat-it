@@ -69,6 +69,8 @@ djangorestframework
 pyyaml
 requests
 django-cors-headers
+cloudinary
+dotenv
 ```
 
 Django versions tend to change a lot with time. So it is important that we specify a version to avoid unwanted effects.

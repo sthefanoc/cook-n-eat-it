@@ -1,3 +1,4 @@
 /server-django/venv
 __pycache__
 /server-django/.env
+.env
