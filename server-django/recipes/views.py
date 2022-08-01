@@ -84,3 +84,10 @@ def recipe_alt_view(request, id=None, *args, **kwargs):
 
     if method == 'DELETE': # Delete item
         pass
+
+# Another alternative to use an all-in-one view: 
+# mixins.ListModelMixin, 
+# mixins.CreateModelMixin, 
+# mixins.RetrieveModelMixin, 
+# mixins.UpdateModelMixin, 
+# mixins.DestroyModelMixin
