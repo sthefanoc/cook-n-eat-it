@@ -8,6 +8,10 @@ class Recipe(models.Model):
     cooking_time=models.IntegerField(blank=True, null=True)
     serves=models.IntegerField(blank=True, null=True, default=1)
     ingredients= models.CharField(max_length=1000, blank=True, null=True)
+    @property
+    def ingredients_list(self):
+        return self.ingredients.split(',')
+    
     
     # @property
     # def total_time_method(self):
