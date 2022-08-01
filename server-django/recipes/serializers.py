@@ -9,10 +9,11 @@ class RecipeSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
         extra_kwargs = {
             'title': {'required': True},
-            'slug': {'required': True},
             'content': {'required': True},
             'preparation_time': {'required': True},
             'cooking_time': {'required': True},
             'total_time': {'required': True},
             'serves': {'required': True},
+            'ingredients': {'required': True},
+            'ingredients_list': {'required': True},
         }

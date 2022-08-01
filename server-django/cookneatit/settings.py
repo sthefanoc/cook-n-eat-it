@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import cloudinary
+import os
 
 cloudinary.config(
     cloud_name="cookneatit",
-    api_key="988984668984668",
-    api_secret="988984668984668"
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret="os.environ.get('CLOUDINARY_API_SECRET')"
 )
 
 
