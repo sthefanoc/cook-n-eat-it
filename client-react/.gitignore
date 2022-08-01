@@ -1,11 +1,3 @@
-/server-django/venv
-__pycache__
-/server-django/.env
-.env
-safe.txt
-/.vscode/
-
-# React Client with vite
 # Logs
 logs
 *.log

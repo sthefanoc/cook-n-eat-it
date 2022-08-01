@@ -10,6 +10,7 @@ A recipe sharing application using Django and React.
   - [Django recipe server](#django-recipe-server)
     - [Create Django project](#create-django-project)
     - [Start recipes app](#start-recipes-app)
+  - [React client](#react-client)
   - [Project commit structure](#project-commit-structure)
 
 ## Project Start
@@ -184,7 +185,20 @@ python manage.py migrate
 Now
 
 
+## React client
 
+To bootstrap the project with [vite](https://vite.netlify.com/), run the command inside the frontend directory:
+
+```bash
+npm create vite .
+```
+Then, choose the version with React and TypeScript.
+Following, we can run the project with:
+
+```bash
+npm install
+npm run dev
+```
 
 
 

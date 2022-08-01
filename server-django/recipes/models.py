@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.template.defaultfilters import slugify
+import json
 class Recipe(models.Model):
     id=models.AutoField(primary_key=True)
     title=models.CharField(max_length=255, default="New recipe")
@@ -13,7 +14,7 @@ class Recipe(models.Model):
     serves=models.IntegerField(blank=True, null=True, default=1)
     ingredients= models.CharField(max_length=1000, blank=True, null=True)
     image=CloudinaryField('Image', blank=True, null=True, overwrite=True, format='jpg')
-    ingredients_list=models.CharField(max_length=1000, blank=True, null=True, default='[]')
+    ingredients_list=models.JSONField(max_length=1000, blank=True, null=True, default='{}')
     
     def save(self, *args, **kwargs):
         # Slug
@@ -24,8 +25,8 @@ class Recipe(models.Model):
         
         # Ingredients list
         if len(self.ingredients) > 0:
-            self.ingredients_list=self.ingredients.split(',')
-        self.ingredients_list=[]
+            self.ingredients_list=json.dumps([item.strip() for item in self.ingredients.split(',')])
+        self.ingredients_list='{}'
 
         # Total time
         if self.preparation_time is not None and self.cooking_time is not None:
