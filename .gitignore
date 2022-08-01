@@ -2,3 +2,5 @@
 __pycache__
 /server-django/.env
 .env
+safe.txt
+/.vscode/
