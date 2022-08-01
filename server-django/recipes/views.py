@@ -10,7 +10,7 @@ from .models import Recipe
 from .serializers import RecipeSerializer
 
 # CLASS BASED VIEWS:
-class RecipeListCreateAPIView(generics.ListCreateAPIView):
+class RecipeListCreateAPIView(generics.ListCreateAPIView): # GET / POST
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
 
@@ -24,14 +24,14 @@ class RecipeListCreateAPIView(generics.ListCreateAPIView):
 
 recipe_list_create_view = RecipeListCreateAPIView.as_view()
 
-class RecipeDetailAPIView(generics.RetrieveAPIView):
+class RecipeDetailAPIView(generics.RetrieveAPIView): # GET
     queryset = Recipe.objects.all() # can be customized
     serializer_class = RecipeSerializer
     lookup_field = 'id'
 
 recipe_detail_view = RecipeDetailAPIView.as_view()
 
-class RecipeUpdateAPIView(generics.UpdateAPIView):
+class RecipeUpdateAPIView(generics.UpdateAPIView): # PUT / PATCH
     queryset = Recipe.objects.all() # can be customized
     serializer_class = RecipeSerializer
     lookup_field = 'id'
@@ -43,12 +43,15 @@ class RecipeUpdateAPIView(generics.UpdateAPIView):
 
 recipe_update_view = RecipeUpdateAPIView.as_view()
 
-# class RecipeDeleteAPIView(generics.DeleteAPIView):
-#     queryset = Recipe.objects.all() # can be customized
-#     serializer_class = RecipeSerializer
-#     lookup_field = 'id'
+class RecipeDestroyAPIView(generics.DestroyAPIView): # DELETE
+    queryset = Recipe.objects.all() # can be customized
+    serializer_class = RecipeSerializer
+    lookup_field = 'id'
+    def perform_destroy(self, instance):
+        # Perform needed logic before deleting the object
+        super().perform_destroy(instance)
 
-# recipe_delete_view = RecipeDeleteAPIView.as_view()
+recipe_delete_view = RecipeDestroyAPIView.as_view()
 
 # FUNCTION BASED VIEWS. Good approach, but not as clear as class based views.
 @api_view(['GET', 'POST'])
