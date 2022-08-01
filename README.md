@@ -199,6 +199,10 @@ Following, we can run the project with:
 npm install
 npm run dev
 ```
+Install libraries:
+```bash
+npm i react-router-dom bootstrap react-bootstrap
+```
 
 
 
