@@ -9,7 +9,7 @@ from yaml import serialize # Or Http404
 from .models import Recipe
 from .serializers import RecipeSerializer
 
-# Class based views:
+# CLASS BASED VIEWS:
 class RecipeListCreateAPIView(generics.ListCreateAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
@@ -31,7 +31,26 @@ class RecipeDetailAPIView(generics.RetrieveAPIView):
 
 recipe_detail_view = RecipeDetailAPIView.as_view()
 
-# Function based views. Good approach, but not as clear as class based views.
+class RecipeUpdateAPIView(generics.UpdateAPIView):
+    queryset = Recipe.objects.all() # can be customized
+    serializer_class = RecipeSerializer
+    lookup_field = 'id'
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        if not instance.content:
+            instance.content = instance.title
+            instance.save()
+
+recipe_update_view = RecipeUpdateAPIView.as_view()
+
+# class RecipeDeleteAPIView(generics.DeleteAPIView):
+#     queryset = Recipe.objects.all() # can be customized
+#     serializer_class = RecipeSerializer
+#     lookup_field = 'id'
+
+# recipe_delete_view = RecipeDeleteAPIView.as_view()
+
+# FUNCTION BASED VIEWS. Good approach, but not as clear as class based views.
 @api_view(['GET', 'POST'])
 def recipe_alt_view(request, id=None, *args, **kwargs):
     method=request.method
