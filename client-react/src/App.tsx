@@ -1,8 +1,22 @@
-function App() {
-  
+import { Routes, Route } from 'react-router-dom';
+import  { Container } from 'react-bootstrap';
+import { Home } from './pages/Home';
+import { About } from './pages/About';
+import { Recipes } from './pages/Recipes';
+import { Navbar } from './components/Navbar';
 
-  return (
-    <h1>Nice</h1>
+function App() {
+    return (
+      <>
+        <Navbar />
+        <Container className='mb-4'>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+      </Container>
+      </>
   )
 }
 
