@@ -1,5 +1,6 @@
 import defaultImage from './../assets/defaultImage.webp';
 import { Card } from 'react-bootstrap';
+import { formatTime } from './../utilities/formatTime';
 
 type RecipeItemProps = {
     id: number,
@@ -31,19 +32,25 @@ export function RecipeItem({...recipe}: RecipeItemProps) {
                     <h2 className='fs-2'>{recipe.title}</h2>
                     <span className='ms-2 text-muted'>{recipe.total_time > 0 ? `${recipe.total_time} min` : ''}</span>
                 </Card.Title>
-                <Card.Text>{recipe.content}</Card.Text>
+                <Card.Text>{recipe.content && recipe.content.slice(0, 25)}</Card.Text>
+                <Card.Text className='d-flex justify-content-between align-items-baseline mb-4'>
+                    <span>{formatTime(recipe.created_at)}</span>
+                    <span>{recipe.likes || 12}</span>
+                </Card.Text>
+
+
             </Card.Body>
 
             <div className="recipe-item__content">
                 
-                <p className="recipe-item__description">{recipe.created_at}</p>
+                {/* <p className="recipe-item__description">{recipe.created_at}</p>
                 <p className="recipe-item__description">{recipe.preparation_time}</p>
                 <p className="recipe-item__description">{recipe.cooking_time}</p>
                 <p className="recipe-item__description">{recipe.total_time}</p>
                 <p className="recipe-item__description">{recipe.serves}</p>
                 <p className="recipe-item__description">{recipe.ingredients}</p>
                 <p className="recipe-item__description">{recipe.likes}</p>
-                <p className="recipe-item__description">{recipe.rating}</p>
+                <p className="recipe-item__description">{recipe.rating}</p> */}
             </div>
         </Card>
     )

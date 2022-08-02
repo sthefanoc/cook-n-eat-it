@@ -21,8 +21,8 @@ export function Recipes(){
         <>
             <h1>Recipes</h1>
             <Row xs={1} md={2} lg={3} className="g-3">
-                {recipes && recipes.map(recipe => (
-                    <Col key={recipe.id}>
+                {recipes && recipes.map((recipe, index) => (
+                    <Col key={index}>
                         <RecipeItem {...recipe} />
                     </Col>
                 ))}
