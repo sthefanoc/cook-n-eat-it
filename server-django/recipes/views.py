@@ -11,7 +11,7 @@ from .serializers import RecipeSerializer
 
 # CLASS BASED VIEWS:
 class RecipeListCreateAPIView(generics.ListCreateAPIView): # GET / POST
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.all().order_by('-created_at')
     serializer_class = RecipeSerializer
 
     def perform_create(self, serializer):
