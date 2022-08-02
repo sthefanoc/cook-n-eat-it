@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { Col, Row } from "react-bootstrap"
+import { RecipeItem } from "./../components/RecipeItem"
 
 export function Recipes(){
     const [recipes, setRecipes] = useState([{}])
@@ -18,14 +20,13 @@ export function Recipes(){
     return (
         <>
             <h1>Recipes</h1>
-            <ul>
+            <Row xs={1} md={2} lg={3} className="g-3">
                 {recipes && recipes.map(recipe => (
-                    <li key={recipe.id}>
-                        <h2>{recipe.title}</h2>
-                        <p>{recipe.content}</p>
-                    </li>
+                    <Col key={recipe.id}>
+                        <RecipeItem {...recipe} />
+                    </Col>
                 ))}
-            </ul>
+            </Row>
         </>
     )
 }
