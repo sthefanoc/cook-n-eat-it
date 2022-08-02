@@ -15,6 +15,7 @@ class Recipe(models.Model):
     ingredients= models.CharField(max_length=1000, blank=True, null=True)
     image=CloudinaryField('Image', blank=True, null=True, overwrite=True, format='jpg')
     ingredients_list=models.JSONField(max_length=1000, blank=True, null=True, default='{}')
+    likes=models.IntegerField(blank=True, null=True, default=0)
     
     def save(self, *args, **kwargs):
         # Slug

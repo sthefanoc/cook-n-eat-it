@@ -14,4 +14,5 @@ class RecipeSerializer(serializers.ModelSerializer):
             'cooking_time': {'required': True},
             'serves': {'required': True},
             'ingredients': {'required': True},
+            'likes': {'required': False}
         }
