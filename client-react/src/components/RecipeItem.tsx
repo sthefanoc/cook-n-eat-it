@@ -70,7 +70,7 @@ export function RecipeItem({
                         }}
                         >
                             {liked ? <AiFillHeart color='red' /> : <AiOutlineHeart />}
-                            {likes || 12}
+                            {likes}
                     </span>
                 </Card.Text>
             </Card.Body>

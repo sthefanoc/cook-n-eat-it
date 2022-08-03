@@ -2,12 +2,12 @@ from turtle import title
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 
-from django.shortcuts import get_object_or_404
-from yaml import serialize # Or Http404
+from django.shortcuts import get_object_or_404 #get_object_or_404(Recipe, pk=pk)
 
 from .models import Recipe
-from .serializers import RecipeSerializer
+from .serializers import *
 
 # CLASS BASED VIEWS:
 class RecipeListCreateAPIView(generics.ListCreateAPIView): # GET / POST
@@ -53,6 +53,35 @@ class RecipeDestroyAPIView(generics.DestroyAPIView): # DELETE
 
 recipe_delete_view = RecipeDestroyAPIView.as_view()
 
+# Like functionality
+@api_view(['PUT', 'DELETE'])
+def recipe_detail_function_view(request, id):
+    try:
+        recipe = Recipe.objects.get(id=id)
+    except Recipe.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = RecipeSerializer(recipe, data=request.data,context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        recipe.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class RecipeUpdateAPIView(generics.UpdateAPIView): # PUT / PATCH
+    queryset = Recipe.objects.all() # can be customized
+    serializer_class = RecipeSerializer
+    lookup_field = 'id'
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        instance.likes -= 1
+        instance.save()
+
+recipe_dislike_view = RecipeUpdateAPIView.as_view()
 # FUNCTION BASED VIEWS. Good approach, but not as clear as class based views.
 @api_view(['GET', 'POST'])
 def recipe_alt_view(request, id=None, *args, **kwargs):
