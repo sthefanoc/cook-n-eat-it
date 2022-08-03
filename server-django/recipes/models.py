@@ -21,7 +21,7 @@ class Recipe(models.Model):
         # Slug
         new_slug = slugify(self.title)
         if Recipe.objects.filter(slug=new_slug).exists():
-            new_slug = new_slug + '-' + str(self.id)
+            new_slug = new_slug + '-' + str(self.created_at)[:10]
         self.slug = new_slug
         
         # Ingredients list

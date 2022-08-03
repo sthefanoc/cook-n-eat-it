@@ -1,4 +1,4 @@
-export function addToLocalStorage (item:string, prop:string, value:string){
+export function addToLocalStorage (item:string, prop:string, value:any){
     let data = localStorage.getItem("cooking");
 
     if (data === null || data === 'null') {
@@ -12,7 +12,7 @@ export function addToLocalStorage (item:string, prop:string, value:string){
             data[item][prop] = value
             }
         else {
-            let propToAdd = {}
+            let propToAdd:object = {}
             if (prop !== null) {
                 propToAdd[prop] = value
             }
