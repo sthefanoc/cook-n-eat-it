@@ -1,6 +1,7 @@
 import {Button, Container, Nav, Navbar as NavbarBs} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import { FaHeart, FaRandom } from 'react-icons/fa'
+import { GiCookingPot } from 'react-icons/gi'
 
 
 export function Navbar(){
@@ -8,7 +9,10 @@ export function Navbar(){
     <NavbarBs className='bg-white shadow-sm mb-3'>
         <Container className="d-flex align-">
             <Nav>
-                <Nav.Link to='/' as={NavLink}>Home</Nav.Link>
+                <Nav.Link to='/' as={NavLink} className="d-flex ">
+                    <GiCookingPot size={'2rem'} />
+                    <h1 style={{fontSize: '1.5rem', opacity:"1"}}>CookN'EatIt</h1>
+                </Nav.Link>
                 <Nav.Link to='/recipes' as={NavLink}>Recipes</Nav.Link>
                 <Nav.Link to='/about' as={NavLink}>About</Nav.Link>
             </Nav>

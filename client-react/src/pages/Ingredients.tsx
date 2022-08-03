@@ -4,8 +4,16 @@ import { RecipeItem } from "./../components/RecipeItem"
 import { useRecipeContext } from "./../context/RecipeContext"
 import { Sidebar } from "./../components/Sidebar"
 
-export function Recipes(){
+type RecipesProps = {
+    ingredient: string
+}
+
+export function Recipes({ingredient}:RecipesProps){
     const { recipes } = useRecipeContext()
+
+    const filteredRecipes = recipes.filter((recipe:any) => {
+        return recipe.ingredients.includes(ingredient)
+    })
 
     return (
         <Container fluid>
@@ -16,7 +24,7 @@ export function Recipes(){
                 <Col  xs={10} id="page-content-wrapper">
                     <h1>Recipes</h1>
                     <Row xs={1} md={2} lg={3} className="g-3">
-                        {recipes && recipes.map((recipe:any) => (
+                        {filteredRecipes && filteredRecipes.map((recipe:any) => (
                             <Col key={recipe.id}>
                                 <RecipeItem {...recipe} />
                             </Col>
