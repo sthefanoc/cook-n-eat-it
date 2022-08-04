@@ -7,4 +7,4 @@ class RecipeSerializer(serializers.ModelSerializer):
         model = Recipe
         fields = '__all__'
         read_only_fields = ('id','slug', 'ingredients_list','created_at','total_time')
-        
+

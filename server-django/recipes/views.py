@@ -82,6 +82,9 @@ class RecipeUpdateAPIView(generics.UpdateAPIView): # PUT / PATCH
         instance.save()
 
 recipe_dislike_view = RecipeUpdateAPIView.as_view()
+
+
+
 # FUNCTION BASED VIEWS. Good approach, but not as clear as class based views.
 @api_view(['GET', 'POST'])
 def recipe_alt_view(request, id=None, *args, **kwargs):

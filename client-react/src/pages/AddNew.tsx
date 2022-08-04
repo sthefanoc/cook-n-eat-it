@@ -9,18 +9,19 @@ export function AddNew(){
         const formData = new FormData(event.target);
         const recipe = {
             title: formData.get('title'),
-            preparation_time: formData.get('preparationTime'),
-            cooking_time: formData.get('cookingTime'),
-            serves: formData.get('totalServings'),
-            ingredients: formData.get('ingredients'),
-            content: formData.get('instructions'),
-            image: formData.get('image'),
+            preparation_time: formData.get('preparationTime') || 0,
+            cooking_time: formData.get('cookingTime') || 0,
+            serves: formData.get('totalServings') || 0,
+            ingredients: formData.get('ingredients') || '',
+            content: formData.get('instructions') || '',
+            // image: typeof formData.get('image') === 'string' ? null : formData.get('image'),
         }
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(recipe)
         };
+        console.log('recipe', recipe)
         fetch('http://localhost:8000/api/recipes/', requestOptions)
             .then(response => response.json())
             .then(data => {
@@ -66,11 +67,11 @@ export function AddNew(){
                         <Form.Control as="textarea" rows="3" placeholder="1. Mix the ingredients" name="instructions"/>
                     </Form.Group>
                 </Row>
-                <Row className="mb-4">
+                {/* <Row className="mb-4">
                     <Form.Group as={Col} md="12">
                         <input type="file" accept="image/*" onChange={()=>{console.log('changed image')}} name="image"/>
                     </Form.Group>
-                </Row>
+                </Row> */}
                 <Row className="mb-4">
                     <Col>
                         <Button variant="primary" type="submit">
