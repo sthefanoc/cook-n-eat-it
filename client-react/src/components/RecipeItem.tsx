@@ -53,20 +53,24 @@ export function RecipeItem({
     }
 
     return (
-        <Link to={`/recipe/${slug}/`} style={{textDecoration: 'none', color: 'unset'}}>
+        <>
             <Card className="recipe-item">
-                <Card.Img 
-                    variant="top" 
-                    src={image || defaultImage} 
-                    alt={title} 
-                    width="200px"
-                    style={{objectFit: 'cover'}}
-                    />
+                <Link to={`/recipe/${slug}/`} style={{textDecoration: 'none', color: 'unset'}}>
+                    <Card.Img 
+                        variant="top" 
+                        src={image || defaultImage} 
+                        alt={title} 
+                        width="200px"
+                        style={{objectFit: 'cover'}}
+                        />
+                </Link>
                 <Card.Body className="d-flex flex-column">
-                    <Card.Title className='d-flex justify-content-between align-items-baseline mb-4'>
-                        <h2 className='fs-2'>{title}</h2>
-                        <span className='ms-2 text-muted'>{total_time > 0 ? `${total_time} min` : ''}</span>
-                    </Card.Title>
+                    <Link to={`/recipe/${slug}/`} style={{textDecoration: 'none', color: 'unset'}}>
+                        <Card.Title className='d-flex justify-content-between align-items-baseline mb-4'>
+                            <h2 className='fs-2'>{title}</h2>
+                            <span className='ms-2 text-muted'>{total_time > 0 ? `${total_time} min` : ''}</span>
+                        </Card.Title>
+                    </Link>
                     <Card.Text>{content && content.slice(0, 25)}</Card.Text>
                     <Card.Text className='d-flex justify-content-between align-items-baseline mb-4'>
                         <span className='text-muted'>{formatTime(created_at)}</span>
@@ -81,6 +85,6 @@ export function RecipeItem({
                     </Card.Text>
                 </Card.Body>
             </Card>
-        </Link>
+        </>
     )
 };

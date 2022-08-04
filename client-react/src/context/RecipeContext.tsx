@@ -23,6 +23,18 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
     const [uniqueIngredients, setUniqueIngredients] = useState([])
     const [listByIngredient, setListByIngredient] = useState([])
 
+    async function getData(){
+        await fetch('http://localhost:8000/api/recipes/', {
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+             }})
+        .then(res => res.json())
+        .then(data => {
+            const formattedData = formatData(data)
+            setRecipes(formattedData)
+        })
+    }
     
 
     function getLikes() {
@@ -54,21 +66,14 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
         return listByIngredient
     }
 
-    useEffect(() => {
-        fetch('http://localhost:8000/api/recipes/', {
-            headers : { 
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-             }})
-        .then(res => res.json())
-        .then(data => {
-            const formattedData = formatData(data)
-            setRecipes(formattedData)
-        })
-
+    useEffect( () => {
+        getData()
         getLikes()
-        getUniqueIngredients()
     }, [])
+
+    useEffect( () => {
+        getUniqueIngredients()
+    }, [recipes])
 
     return (
         <RecipeContext.Provider value={{recipes, likes, uniqueIngredients}}>

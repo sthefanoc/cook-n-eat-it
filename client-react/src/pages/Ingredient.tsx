@@ -1,18 +1,26 @@
 import { useEffect, useState, useContext } from "react"
 import { Col, Row, Container } from "react-bootstrap"
-import { RecipeItem } from "./../components/RecipeItem"
-import { useRecipeContext } from "./../context/RecipeContext"
-import { Sidebar } from "./../components/Sidebar"
+import { RecipeItem } from "../components/RecipeItem"
+import { useRecipeContext } from "../context/RecipeContext"
+import { Sidebar } from "../components/Sidebar"
+import { useParams } from "react-router-dom"
 
 type RecipesProps = {
-    ingredient: string
+    ingredient: string,
+    match: any
 }
 
-export function Recipes({ingredient}:RecipesProps){
+export function Ingredient(){
+    const { ingredientName } = useParams()
     const { recipes } = useRecipeContext()
 
     const filteredRecipes = recipes.filter((recipe:any) => {
-        return recipe.ingredients.includes(ingredient)
+        let nameToSearch = ingredientName
+        if (ingredientName) {
+            nameToSearch = ingredientName.replaceAll('-',' ')
+        }
+        
+        return recipe?.ingredients?.toLowerCase().search(nameToSearch) > -1
     })
 
     return (
