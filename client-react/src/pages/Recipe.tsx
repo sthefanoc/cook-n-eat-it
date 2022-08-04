@@ -16,12 +16,7 @@ export function Recipe() {
     const { recipeSlug } = useParams()
     const { recipes } = useRecipeContext()
 
-    console.log('recipeSlug', recipeSlug);
-    console.log('recipes', recipes);
-
     const recipe = recipes.filter((recipe:any) => recipe.slug === recipeSlug)
-
-
 
     const {
         title,
@@ -44,7 +39,6 @@ export function Recipe() {
     const [ratingCount, setRatingCount] = useState(rating);
 
     const handleLike = () => {
-        console.log('likes, already_liked', likes, already_liked);
         const liked: boolean = Boolean(getFromLocalStorage(id.toString(), "already_liked")) || false;
         addToLocalStorage(id.toString(), "already_liked", !liked);
         setLiked(!liked);

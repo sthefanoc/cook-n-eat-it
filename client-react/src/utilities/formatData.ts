@@ -14,6 +14,5 @@ export function formatData(data: any) {
             }}
         }
     );
-    console.log('finalData', finalData);
     return finalData;
 }

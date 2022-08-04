@@ -65,7 +65,6 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
                 }
             }
         })
-        console.log('amountOfEach', amountOfEach)
         setUniqueIngredients(uniqueIngredients)
         return uniqueIngredients
     }
