@@ -1,45 +1,44 @@
 import { useState } from 'react'
 import Rating from 'react-rating';
 import defaultImage from './../assets/defaultImage.webp';
-import { Container, Card, ListGroup } from 'react-bootstrap';
+import { Container, Card, ListGroup, Button } from 'react-bootstrap';
 import { formatTime } from './../utilities/formatTime';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { getFromLocalStorage } from '../utilities/getFromLocalStorage';
 import { addToLocalStorage } from '../utilities/addToLocalStorage';
 import { AiFillBackward, AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { useRecipeContext } from '../context/RecipeContext';
+import { useParams } from 'react-router-dom';
 
 
-type RecipeItemProps = {
-    id: number,
-    title: string,
-    content: string,
-    image: string,
-    created_at: string,
-    preparation_time: number,
-    cooking_time: number,
-    total_time: number,
-    serves: number,
-    ingredients: string[],
-    likes: number,
-    already_liked: boolean,
-    rating: number
-}
 
-export function Recipe({
-    id,
-    title,
-    content,
-    image,
-    created_at,
-    preparation_time,
-    cooking_time,
-    total_time,
-    serves,
-    ingredients,
-    likes,
-    already_liked,
-    rating,
-    }: RecipeItemProps) {
+export function Recipe() {
+    const { recipeSlug } = useParams()
+    const { recipes } = useRecipeContext()
+
+    console.log('recipeSlug', recipeSlug);
+    console.log('recipes', recipes);
+
+    const recipe = recipes.filter((recipe:any) => recipe.slug === recipeSlug)
+
+
+
+    const {
+        title,
+        slug,
+        content,
+        image,
+        created_at,
+        preparation_time,
+        cooking_time,
+        total_time,
+        serves,
+        ingredients,
+        ingredients_list,
+        likes,
+        already_liked,
+        rating } = recipe[0]
+
     const [liked, setLiked] = useState(already_liked);
     const [likesCount, setLikesCount] = useState(likes);
     const [ratingCount, setRatingCount] = useState(rating);
@@ -73,28 +72,20 @@ export function Recipe({
                                 />
                         </div>
                         <ListGroup>
-                            
-                            <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                            {ingredients_list && 
+                            ingredients_list.map((ingredient:any, index:number) => {
+                                return (<ListGroup.Item>{ingredient}</ListGroup.Item>)
+                            })}
                         </ListGroup>
-                        <Card.Text>
-                            <span>250g</span>
-                            <span>500g</span>
-                            <span>1000g</span>
-                        </Card.Text>
-                        <div className="price">
-                            <h3>$15.90</h3>
-                            <div className="qty">
-                                <i onClick={()=>{alert('a')}} className="fa fa-minus"></i>
-                                <p>{'addcart'}</p>
-                                <i onClick={()=>{alert('a')}} className="fa fa-plus"></i>
-                            </div>
-                        </div>
-                        <div className="description">
-                            <h5>Description</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                        </div>
+                        <Card.Text>{content}</Card.Text>
+                        <Card.Text>{image}</Card.Text>
+                        <Card.Text>{created_at}</Card.Text>
+                        <Card.Text>{preparation_time}</Card.Text>
+                        <Card.Text>{cooking_time}</Card.Text>
+                        <Card.Text>{total_time}</Card.Text>
+                        <Card.Text>{serves}</Card.Text>
                         <div className="last_section">
-                            <button onClick={()=>{alert('a')}}>Add to cart</button>
+                            <Button onClick={()=>{alert('a')}}>Add to favorites</Button>
                             <div className="heart">
                                 {true ? <AiOutlineHeart /> : <AiOutlineHeart />}
                             </div>
