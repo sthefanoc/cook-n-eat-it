@@ -3,8 +3,6 @@ import { Col, Row, Container } from "react-bootstrap"
 import { RecipeItem } from "../components/RecipeItem"
 import { useRecipeContext } from "../context/RecipeContext"
 import { Sidebar } from "../components/Sidebar"
-import { useParams } from "react-router-dom"
-import { getFromLocalStorage } from "../utilities/getFromLocalStorage"
 
 type RecipesProps = {
     ingredient: string,
@@ -18,10 +16,10 @@ export function LikedRecipes(){
     useEffect(() => {
         if (likes){
             const likedRecipes = recipes.filter((recipe:any) => {
-                return likes.includes(recipe.id)})
+                return likes.includes(recipe.id.toString())})
             if (likedRecipes) {
                 setFilteredRecipes(likedRecipes)
-            }    
+            } 
         }
     }, [likes])
     
