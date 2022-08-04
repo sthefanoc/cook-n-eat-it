@@ -7,6 +7,7 @@ import { Recipes } from './pages/Recipes';
 import { Recipe } from './pages/Recipe';
 import { Navbar } from './components/Navbar';
 import { Ingredient } from './pages/Ingredient';
+import { LikedRecipes } from './pages/LikedRecipes';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/add-new" element={<AddNew />} />
+            <Route path="/likes" element={<LikedRecipes />} />
             <Route path="/recipe/:recipeSlug" element={<Recipe />} />
             <Route path="/ingredient/:ingredientName" element={<Ingredient />} />
           </Routes>

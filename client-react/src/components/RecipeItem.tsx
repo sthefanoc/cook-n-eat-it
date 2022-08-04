@@ -6,6 +6,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { getFromLocalStorage } from '../utilities/getFromLocalStorage';
 import { addToLocalStorage } from '../utilities/addToLocalStorage';
 import { Link } from 'react-router-dom';
+import { useRecipeContext } from '../context/RecipeContext';
 
 
 type RecipeItemProps = {
@@ -44,12 +45,13 @@ export function RecipeItem({
     const [liked, setLiked] = useState(already_liked);
     const [likesCount, setLikesCount] = useState(likes);
     const [ratingCount, setRatingCount] = useState(rating);
+    const { getLikes } = useRecipeContext();
 
     const handleLike = () => {
-        console.log('likes, already_liked', likes, already_liked);
         const liked: boolean = Boolean(getFromLocalStorage(id.toString(), "already_liked")) || false;
         addToLocalStorage(id.toString(), "already_liked", !liked);
         setLiked(!liked);
+        getLikes()
     }
 
     return (

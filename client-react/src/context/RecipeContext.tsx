@@ -8,7 +8,8 @@ type RecipeProviderProps = {
 type RecipeContext ={
     likes: string[],
     recipes: any[],
-    uniqueIngredients: string[]
+    uniqueIngredients: string[],
+    getLikes: () => void,
 }
 
 const RecipeContext = createContext({} as RecipeContext);
@@ -21,7 +22,6 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
     const [likes, setLikes] = useState(0);
     const [recipes, setRecipes] = useState([{}])
     const [uniqueIngredients, setUniqueIngredients] = useState([])
-    const [listByIngredient, setListByIngredient] = useState([])
 
     async function getData(){
         await fetch('http://localhost:8000/api/recipes/', {
@@ -55,17 +55,21 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
     function getUniqueIngredients() {
         const allIngredients = recipes.map((recipe:any)=> recipe?.ingredients_list).flat()
         const uniqueIngredients = Array.from(new Set(allIngredients))
-        console.log('uniqueIngredients', uniqueIngredients)
-        console.log('allIngredients', allIngredients)
+        const amountOfEach = {}
+        allIngredients.forEach((item:any) =>{
+            if(Object.keys(amountOfEach).includes(item)){
+                amountOfEach[item]["amount"] += 1
+            } else {
+                amountOfEach[item] = {
+                    "amount": 1
+                }
+            }
+        })
+        console.log('amountOfEach', amountOfEach)
         setUniqueIngredients(uniqueIngredients)
         return uniqueIngredients
     }
-    function getListByIngredient() {
-        const listByIngredient = recipes.map(i=> i?.ingredients_list).flat()
-        setListByIngredient(listByIngredient)
-        return listByIngredient
-    }
-
+    
     useEffect( () => {
         getData()
         getLikes()
@@ -76,7 +80,7 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
     }, [recipes])
 
     return (
-        <RecipeContext.Provider value={{recipes, likes, uniqueIngredients}}>
+        <RecipeContext.Provider value={{recipes, likes, uniqueIngredients, getLikes}}>
             {children}
         </RecipeContext.Provider>)
 }

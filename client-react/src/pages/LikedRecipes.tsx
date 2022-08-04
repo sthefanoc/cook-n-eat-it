@@ -4,33 +4,27 @@ import { RecipeItem } from "../components/RecipeItem"
 import { useRecipeContext } from "../context/RecipeContext"
 import { Sidebar } from "../components/Sidebar"
 import { useParams } from "react-router-dom"
+import { getFromLocalStorage } from "../utilities/getFromLocalStorage"
 
 type RecipesProps = {
     ingredient: string,
     match: any
 }
 
-export function Ingredient(){
-    const [ ingredientCompleteName, setIngredientCompleteName ] = useState("")
-    const { ingredientName } = useParams()
-    const { recipes } = useRecipeContext()
+export function LikedRecipes(){
+    const [ filteredRecipes, setFilteredRecipes ] = useState([])
+    const { recipes, likes } = useRecipeContext()
 
     useEffect(() => {
-        if (ingredientName){
-            setIngredientCompleteName(ingredientName)
-            if (ingredientName) {
-                setIngredientCompleteName(ingredientName.replaceAll('-',' '))
-            }
-        }}, [ingredientName])
-
-    const filteredRecipes = recipes.filter((recipe:any) => {
-        let nameToSearch = ingredientName
-        if (ingredientName) {
-            nameToSearch = ingredientName.replaceAll('-',' ')
+        if (likes){
+            const likedRecipes = recipes.filter((recipe:any) => {
+                return likes.includes(recipe.id)})
+            if (likedRecipes) {
+                setFilteredRecipes(likedRecipes)
+            }    
         }
-        
-        return recipe?.ingredients?.toLowerCase().search(nameToSearch) > -1
-    })
+    }, [likes])
+    
 
     return (
         <Container fluid>
@@ -39,7 +33,7 @@ export function Ingredient(){
                     <Sidebar />
                 </Col>
                 <Col  xs={10} id="page-content-wrapper">
-                    <h1>Recipes with - {ingredientCompleteName}</h1>
+                    <h1>Recipes</h1>
                     <Row xs={1} md={2} lg={3} className="g-3">
                         {filteredRecipes && filteredRecipes.map((recipe:any) => (
                             <Col key={recipe.id}>
