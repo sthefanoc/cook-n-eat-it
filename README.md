@@ -12,6 +12,7 @@
     - [Install packages](#install-packages)
     - [Configure environment variables](#configure-environment-variables-1)
     - [Run the client](#run-the-client)
+  - [Next Steps](#next-steps)
   - [Project commit structure](#project-commit-structure)
 
 # Cook N' Eat It
@@ -50,7 +51,7 @@ To run the project, it is necessary to:
 
 ### Install Python and Git Bash
 
-Install [python 3]([https://www.python.org/downloads/](https://www.python.org/downloads/)).
+Install [python 3](https://www.python.org/downloads/).
 Install [Git bash](https://git-scm.com/downloads).
 
 Add python to path (if it isn’t already).
@@ -108,7 +109,6 @@ asgiref==3.5.2
 certifi==2022.6.15
 charset-normalizer==2.1.0
 cloudinary==1.29.0
-Django==4.0.6
 idna==3.3
 Pillow==9.2.0
 python-dotenv==0.20.0
@@ -129,6 +129,14 @@ To install dependencies, run:
 ```bash
 pip install -r requirements.txt
 ```
+
+Some of the tech choices:
+- [Django](https://www.djangoproject.com/), for a well structured, safe and reliable backend.
+- [Djangorestframework](https://www.django-rest-framework.org), for building a REST API on top of Django.
+- [Django-Cloudinary-Storage](https://django-cloudinary-storage.readthedocs.io/en/latest/), for uploading images to the cloud.
+- [Django-CORS-Headers](https://django-cors-headers.readthedocs.io/en/latest/), for allowing cross-origin requests.
+- [python-dotenv](https://pypi.org/project/python-dotenv/), for loading environment variables from a .env file.
+
 
 ### Configure environment variables
 For environmental variables there are cloudinary credentials and the secret key.
@@ -167,7 +175,15 @@ Inside the client-react folder, run the following command:
 npm install
 ```
 
-The project was bootstrapped by [vite](https://vite.netlify.com/) to improve development performance.
+Some of the tech choices for the project:
+- [Vite](https://vite.netlify.com/) for development performance.
+- [TypeScript](https://www.typescriptlang.org/), for type safety and error minimization.
+- [React Bootstrap](https://react-bootstrap.github.io/), for fast and responsive UI.
+- [React Router](https://reactrouter.com/), for easy navigation.
+- [React Icons](https://reacticons.com/), for icons.
+- [React Rating](https://react-rating.js.org/), for rating.
+
+
 
 ### Configure environment variables
 No environment variables are necessary for the client.
@@ -178,6 +194,11 @@ Inside the client-react folder, run the following command:
 npm run dev
 ```
 
+## Next Steps
+
+For the frontend:
+[] Do something
+[] Do something else
 
 
 
