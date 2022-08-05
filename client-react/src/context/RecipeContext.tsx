@@ -10,6 +10,10 @@ type RecipeContext ={
     recipes: any[],
     uniqueIngredients: string[],
     getLikes: () => void,
+    isSearchActive: boolean,
+    setIsSearchActive: () => void,
+    searchTerm: string,
+    setSearchTerm: () => void
 }
 
 const RecipeContext = createContext({} as RecipeContext);
@@ -22,6 +26,8 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
     const [likes, setLikes] = useState(0);
     const [recipes, setRecipes] = useState([{}])
     const [uniqueIngredients, setUniqueIngredients] = useState([])
+    const [isSearchActive, setIsSearchActive] = useState(false)
+    const [searchTerm, setSearchTerm] = useState("")
 
     async function getData(){
         await fetch('http://localhost:8000/api/recipes/', {
@@ -79,7 +85,7 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
     }, [recipes])
 
     return (
-        <RecipeContext.Provider value={{recipes, likes, uniqueIngredients, getLikes}}>
+        <RecipeContext.Provider value={{recipes, likes, uniqueIngredients, getLikes, isSearchActive, setIsSearchActive, searchTerm, setSearchTerm}}>
             {children}
         </RecipeContext.Provider>)
 }

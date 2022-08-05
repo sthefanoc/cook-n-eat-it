@@ -21,7 +21,7 @@ type RecipeItemProps = {
     total_time: number,
     serves: number,
     ingredients: string[],
-    likes: number,
+    likes: string[],
     already_liked: boolean,
     rating: number
 }
