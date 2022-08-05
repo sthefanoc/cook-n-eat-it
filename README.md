@@ -13,6 +13,8 @@
     - [Configure environment variables](#configure-environment-variables-1)
     - [Run the client](#run-the-client)
   - [Next Steps](#next-steps)
+    - [To be implemented](#to-be-implemented)
+    - [For deployment](#for-deployment)
   - [Project commit structure](#project-commit-structure)
 
 # Cook N' Eat It
@@ -193,14 +195,33 @@ Inside the client-react folder, run the following command:
 ```bash
 npm run dev
 ```
+The application will be available at [http://localhost:5173/](http://localhost:5173/)(Vite's default port).
 
 ## Next Steps
 
+### To be implemented
+
+General:
+- Add user authentication.
+- Implement automated testing
+
 For the frontend:
-[] Do something
-[] Do something else
+- Fix image upload problem
+- Build a landing page using some tool that allows (SSG/SSR) to improve SEO and performance.
+- Filter by multiple ingredients.
+- Allow multiple images on recipe.
+- Allow comments.
+- Personal page.
+- Edit/delete recipe.
 
+For the backend:
+- Complete implementation of like and rate functionality.
+- Endpoints specific to filters (ingredients, search, liked).
 
+### For deployment
+There are two ways to deploy this specific combination of technologies:
+ - **Both apps together**: after generating the react bundle, the files can be moved inside Django's server and, the `views.py` and `urls.py` can be configured to render React's `index.html` directly.
+ - **Separating the apps** (the one I personally prefer): each project is separate and the connect to each other via their respective URIs. The benefit of this approach is that  necessities and dependencies can be handled separately, which is more flexible and easier to maintain, especially with growing teams. 
 
 ## Project commit structure
 
