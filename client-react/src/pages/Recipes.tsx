@@ -5,6 +5,7 @@ import { useRecipeContext } from "./../context/RecipeContext"
 import { Sidebar } from "./../components/Sidebar"
 import { SearchBox } from "../components/SearchBox"
 
+
 export function Recipes(){
     const { recipes, isSearchActive, searchTerm } = useRecipeContext()
     const [filteredRecipes, setFilteredRecipes] = useState([])
@@ -38,11 +39,13 @@ export function Recipes(){
                                         <RecipeItem {...recipe} />
                                     </Col>
                                 )))) : (
-                                    recipes && recipes.map((recipe:any) => (
+                                    recipes.length === 0 ? (
+                                        <h2>No recipes found</h2>
+                                    ) : (recipes.map((recipe:any) => (
                                         <Col key={recipe.id}>
                                             <RecipeItem {...recipe} />
                                         </Col>
-                                    ))
+                                    )))
                                 )
                         }
                     </Row>

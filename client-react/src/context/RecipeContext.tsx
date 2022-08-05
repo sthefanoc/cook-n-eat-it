@@ -11,9 +11,9 @@ type RecipeContext ={
     uniqueIngredients: string[],
     getLikes: () => void,
     isSearchActive: boolean,
-    setIsSearchActive: () => void,
+    setIsSearchActive: (value: boolean) => void,
     searchTerm: string,
-    setSearchTerm: () => void
+    setSearchTerm: (value: string) => void
 }
 
 const RecipeContext = createContext({} as RecipeContext);

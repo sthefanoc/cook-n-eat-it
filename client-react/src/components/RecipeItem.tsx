@@ -21,7 +21,7 @@ type RecipeItemProps = {
     total_time: number,
     serves: number,
     ingredients: string[],
-    likes: string[],
+    likes: number,
     already_liked: boolean,
     rating: number
 }
@@ -73,7 +73,9 @@ export function RecipeItem({
                             <span className='ms-2 text-muted'>{total_time > 0 ? `${total_time} min` : ''}</span>
                         </Card.Title>
                     </Link>
-                    <Card.Text>{content && content.slice(0, 25)}</Card.Text>
+                    <Link to={`/recipe/${slug}/`} style={{textDecoration: 'none', color: 'unset'}}>
+                        <Card.Text className="text-muted">{content && content.slice(0, 50) + '...'}</Card.Text>
+                    </Link>
                     <Card.Text className='d-flex justify-content-between align-items-baseline mb-4'>
                         <span className='text-muted'>{formatTime(created_at)}</span>
                         <span 
@@ -82,7 +84,7 @@ export function RecipeItem({
                             onClick={()=>{handleLike()}}
                             >
                                 {liked ? <AiFillHeart color='red' /> : <AiOutlineHeart />}
-                                {likes}
+                                {likes + (liked ? 1 : 0)}
                         </span>
                     </Card.Text>
                 </Card.Body>
