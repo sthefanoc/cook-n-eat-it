@@ -28,7 +28,7 @@ export function Navbar(){
                     <GiCookingPot size={'2rem'} />
                     <h1 style={{fontSize: '1.5rem', opacity:"1"}}>CookN'EatIt</h1>
                 </Nav.Link>
-                <Nav.Link to='/recipes' as={NavLink}>Recipes</Nav.Link>
+                {/* <Nav.Link to='/recipes' as={NavLink}>Recipes</Nav.Link> */}
                 <Nav.Link to='/add-new' as={NavLink}>Add</Nav.Link>
             </Nav>
             <Container className="d-flex align-items-center justify-content-end">
