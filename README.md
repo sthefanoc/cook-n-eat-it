@@ -20,7 +20,7 @@ A recipe sharing application using Django as a backend and React as a frontend.
 ## Introduction
 The application allows users to create recipes and share them with other users.
 
-<img height="400" src="repo_imagescookneatit.png" title="Cook N Eat It" alt="Cook N Eat It" />
+<img height="400" src="repo_images/cookneatit.png" title="Cook N Eat It" alt="Cook N Eat It" />
 
 Below, a list of functionalities anticipated in the application:
 - React frontend
