@@ -1,19 +1,52 @@
-# Cook N' Eat It
-A recipe sharing application using Django and React.
-
 **Table of contents:**
 - [Cook N' Eat It](#cook-n-eat-it)
-  - [Project Start](#project-start)
+  - [Introduction](#introduction)
+  - [Project Start - Django Server](#project-start---django-server)
     - [Install Python and Git Bash](#install-python-and-git-bash)
     - [Create virtual environment](#create-virtual-environment)
     - [Install requirements](#install-requirements)
-  - [Django recipe server](#django-recipe-server)
-    - [Create Django project](#create-django-project)
-    - [Start recipes app](#start-recipes-app)
-  - [React client](#react-client)
+    - [Configure environment variables](#configure-environment-variables)
+    - [Run the server](#run-the-server)
+  - [Project Start - React Client](#project-start---react-client)
+    - [Install node and npm](#install-node-and-npm)
+    - [Install packages](#install-packages)
+    - [Configure environment variables](#configure-environment-variables-1)
+    - [Run the client](#run-the-client)
   - [Project commit structure](#project-commit-structure)
 
-## Project Start
+# Cook N' Eat It
+A recipe sharing application using Django as a backend and React as a frontend.
+
+## Introduction
+The application allows users to create recipes and share them with other users.
+
+<img height="400" src="repo_imagescookneatit.png" title="Cook N Eat It" alt="Cook N Eat It" />
+
+Below, a list of functionalities anticipated in the application:
+- React frontend
+  - Create recipes
+  - Filter by one specific ingredient
+  - Filter by search term
+  - Like recipes
+  - Filter by liked recipes
+  - Add images to recipes (in development)
+- Django Backend
+  - See all recipes (GET)
+  - Create recipes (POST)
+  - Delete specific recipe (DELETE)
+  - Update specific recipe (PUT)
+  - Upload images to cloudinary
+  - Change amount of likes (PUT) (in development)
+  - Change average rating (PUT) (in development)
+
+## Project Start - Django Server
+
+To run the project, it is necessary to:
+- Install python and git bash.
+- Create an activate virtual environment
+- Install requirements
+- Configure environment variables
+- Run the server
 
 ### Install Python and Git Bash
 
@@ -66,12 +99,27 @@ In the root of the project, add a `requirements.txt` file with:
 
 ```
 django>=4.0.0,<4.1.0
-djangorestframework
-pyyaml
-requests
-django-cors-headers
-cloudinary
-dotenv
+django-cloudinary-storage==0.3.0
+django-cors-headers==3.13.0
+django-environ==0.9.0
+django-taggit==3.0.0
+djangorestframework==3.13.1
+asgiref==3.5.2
+certifi==2022.6.15
+charset-normalizer==2.1.0
+cloudinary==1.29.0
+Django==4.0.6
+idna==3.3
+Pillow==9.2.0
+python-dotenv==0.20.0
+pytz==2022.1
+PyYAML==6.0
+requests==2.28.1
+six==1.16.0
+sqlparse==0.4.2
+tzdata==2022.1
+urllib3==1.26.11
+
 ```
 
 Django versions tend to change a lot with time. So it is important that we specify a version to avoid unwanted effects.
@@ -82,146 +130,53 @@ To install dependencies, run:
 pip install -r requirements.txt
 ```
 
-## Django recipe server
-
-### Create Django project
-
-Create Django project inside the `/server-django` folder, run:
-
-```bash
-django-admin startproject cookneatit .
+### Configure environment variables
+For environmental variables there are cloudinary credentials and the secret key.
+On a `.env` file, in the root of the django project, add the following:
 ```
-Start our API with:
-```bash
-python manage.py startapp api
-```
-Setup API with changes to `api/urls.py`:
-```python
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('', views.api_home),
-]
-```
-And to `api/views.py`:
-```python
-from django.http import JsonResponse
-
-def api_home(request, *args, **kwargs):
-    return JsonResponse({'message': 'Hello world!'})
-```
-And `cookneatit/settings.py`:
-```python
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'api',
-]
-```
-And `cookneatit/urls.py`:
-```python
-from django.contrib import admin
-from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-]
+CLOUDINARY_NAME="workspace_name"
+CLOUDINARY_API_KEY="api_key"
+CLOUDINARY_API_SECRET="api_secret" 
 ```
 
-Now, we can run the server with:
+### Run the server
+
+With the virtual environment activated, run the server:
+
 ```bash
 python manage.py runserver
 ```
-The application will be available at http://localhost:8000/api/
-```JSON
-{
-    "message": "Hello, World!"
-}
-```
-### Start recipes app
-To start the app creating, run:
-```bash
-python manage.py startapp recipes
-```
-Add the application to `cookneatit/settings.py`:
-```python
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'api',
-    'recipes'
-]
-```
-Inside `recipes/models.py`, we'll start our Model:
-```python
-from email import contentmanager
-from turtle import title
-from django.db import models
 
-class Recipe(models.Model):
-    title=models.CharField(max_length=255),
-    content=models.TextField(blank=True, null=True),
-    created_at=models.DateTimeField(auto_now_add=True),
-    preparation_time=models.IntegerField(blank=True, null=True),
-    cooking_time=models.IntegerField(blank=True, null=True),
-    total_time=models.IntegerField(blank=True, null=True),
-    serves=models.IntegerField(blank=True, null=True, default=1),
-``` 
-Apply changes to database with:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-Now
+The application will be available at [http://localhost:8000/](http://localhost:8000/).
 
+## Project Start - React Client
+To run the client, it is necessary to:
+- Install node and npm
+- Install packages
+- Configure environment variables
+- Run the client
 
-## React client
+### Install node and npm
+To download Node an NPM, visit [Node.js](https://nodejs.org/en/download/) and [npm](https://www.npmjs.com/get-npm).
+With both tools added to the PATH, run the following command:
 
-To bootstrap the project with [vite](https://vite.netlify.com/), run the command inside the frontend directory:
-
-```bash
-npm create vite .
-```
-Then, choose the version with React and TypeScript.
-Following, we can run the project with:
+### Install packages
+Inside the client-react folder, run the following command:
 
 ```bash
 npm install
+```
+
+The project was bootstrapped by [vite](https://vite.netlify.com/) to improve development performance.
+
+### Configure environment variables
+No environment variables are necessary for the client.
+### Run the client
+Inside the client-react folder, run the following command:
+
+```bash
 npm run dev
 ```
-Install libraries:
-```bash
-npm i react-router-dom bootstrap react-bootstrap
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
